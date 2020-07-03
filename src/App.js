@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { ThemContext } from './contexts/theme-context';
+import { UserContext } from './contexts/user-context';
+import Wrapper from './components/Wrapper';
+import Content from './components/Content';
 
 function App() {
+  const [theme] = useState('dark');
+  const [user] = useState('John');
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemContext.Provider value={theme}>
+        <UserContext.Provider value={{ name: `hello ${user}` }}>
+          <Wrapper>
+            <Content />
+          </Wrapper>
+        </UserContext.Provider>
+      </ThemContext.Provider>
     </div>
   );
 }
